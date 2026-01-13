@@ -206,6 +206,7 @@ button {
 /* Start cart list card styles */
 .cart-card {
   display: grid;
+  position: relative;
   grid-template-columns: 25% auto 15%;
   font-size: var(--small-font);
   /* max-height: 120px; */
@@ -239,6 +240,24 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+.cart-card__remove {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #333;
+  padding: 0;
+}
+
+.cart-card__remove::before {
+  content: '\00d7';
+  color: black;
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+  background-color: #fff;
+  display: block;
 }
 
 @media screen and (min-width: 500px) {
