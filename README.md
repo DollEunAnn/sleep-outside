@@ -30,5 +30,7 @@ _BYU-Pathway Worldwide improves lives through access to spiritually based, onlin
 - Eunice Ann Hernandez Dollete
 - Stanley Uchechukwu Ferdinand
 - Vegard André Amundsen
+- Nilo Amor Urmeneta Jr.
+- Rudy II Francisco Pilande
 
 
