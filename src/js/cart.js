@@ -9,7 +9,6 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
-  console.log(item);
   const newItem = `<li class="cart-card divider">
     <button class="cart-card__remove" data-id="${item.Id}"></button>
     <a href="#" class="cart-card__image">
