@@ -19,7 +19,31 @@ export default class ProductDetails {
 // add to cart button event handler
     addProductToCart() {
         const cartItems = getLocalStorage("so-cart") || [];
-        cartItems.push(this.product);
+        /* 
+            fix for add to cart duplicates
+            product will always push to the array everytime it was click
+            if we use 'push'
+
+            so we need to check first for the item exist to the cart
+        */
+
+        // check item if exist inside the cart
+        const existingItem = cartItems.find(
+            item => item.Id === this.product.Id
+        );
+
+        // if exist, add 1 more quantity
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            // if doesn't exist, add product with quantity 1. the current display is static only
+            const productWithQuantity = {
+            ...this.product,
+            quantity: 1
+            };
+            cartItems.push(productWithQuantity);
+        }
+        
         setLocalStorage("so-cart", cartItems);
     }
 
