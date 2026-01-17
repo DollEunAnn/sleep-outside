@@ -251,7 +251,7 @@ button {
 }
 
 .cart-card__remove::before {
-  content: '\00d7';
+  content: "\00d7";
   color: black;
   margin: 0;
   padding: 0;
