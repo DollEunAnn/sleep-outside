@@ -51,16 +51,15 @@ function removeProductFromCart(productId) {
 
 function calcTotal() {
   const cartItems = getLocalStorage("so-cart");
-  const cartTotal = document.querySelector('.cart-total');
-  const cartFooter = document.querySelector('.cart-footer');
+  const cartTotal = document.querySelector(".cart-total");
+  const cartFooter = document.querySelector(".cart-footer");
   let total = 0;
   if (!cartItems || cartItems.length == 0) {
-    cartFooter.classList.add('hide');
-  }
-  else if (cartItems) {
-    cartItems.forEach((product) => total += product.ListPrice);
+    cartFooter.classList.add("hide");
+  } else if (cartItems) {
+    cartItems.forEach((product) => (total += product.ListPrice));
     cartTotal.innerHTML = `Total: $ ${total}`;
-    cartFooter.classList.remove('hide');
+    cartFooter.classList.remove("hide");
   }
 }
 
