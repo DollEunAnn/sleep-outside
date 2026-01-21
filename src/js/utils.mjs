@@ -1,3 +1,5 @@
+// PURELY FOR FUNCTIONS = ALL THE OTHER EXTRA STUFF
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -40,3 +42,15 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
+// DISCOUNT FUNCTION
+export function calculateDiscount(listPrice, finalPrice) {
+
+  //no diiscount
+  if (listPrice === finalPrice) {
+    return null;
+  }
+
+  const discountPercent = ((listPrice - finalPrice) / listPrice) * 100;
+
+  return Math.round(discountPercent);
+}
