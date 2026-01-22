@@ -74,7 +74,7 @@ export async function loadTemplate(path) {
   });
   loadTemplate("/public/partials/footer.html").then((template) => {
     renderWithTemplate(template, qs("#footer"));
- }
+    }
   )
 }
 
