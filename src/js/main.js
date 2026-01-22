@@ -1,6 +1,11 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
 
+document.querySelectorAll('.categories a').forEach(link => {
+  const category = link.dataset.category;
+  link.href = `product_listing/index.html?category=${category}`;
+});
+
 const dataSource = new ProductData("tents");
 
 const element = document.querySelector(".product-list");
