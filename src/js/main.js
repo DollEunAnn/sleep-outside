@@ -1,5 +1,6 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 document.querySelectorAll('.categories a').forEach(link => {
   const category = link.dataset.category;
@@ -13,3 +14,5 @@ const element = document.querySelector(".product-list");
 const productList = new ProductList("Tents", dataSource, element);
 
 productList.init();
+
+loadHeaderFooter();

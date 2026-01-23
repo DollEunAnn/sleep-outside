@@ -1,15 +1,23 @@
-import { getLocalStorage } from "./utils.mjs";
-import { setLocalStorage } from "./utils.mjs";
+/*import { getLocalStorage } from "./utils.mjs";
+import { setLocalStorage } from "./utils.mjs";*/
+import { loadHeaderFooter } from "./utils.mjs";
+import ShoppingCart from "./ShoppingCart.mjs";
+
+const element = document.querySelector(".product-list");
+
+const shoppingCart = new ShoppingCart("so-cart", element);
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  const cartItems = shoppingCart.getProducts();
+  /*const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  document.querySelector(".product-list").innerHTML = htmlItems.join("");*/
+  element.innerHTML = "";
+  shoppingCart.renderList(cartItems);
   addRemoveButtonListeners();
-  calcTotal();
+  shoppingCart.getTotal();
 }
 
-function cartItemTemplate(item) {
+/*function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
     <button class="cart-card__remove" data-id="${item.Id}"></button>
     <a href="#" class="cart-card__image">
@@ -27,7 +35,7 @@ function cartItemTemplate(item) {
   </li>`;
 
   return newItem;
-}
+}*/
 
 function addRemoveButtonListeners() {
   const removeBtns = document.querySelectorAll(".cart-card__remove");
@@ -36,14 +44,14 @@ function addRemoveButtonListeners() {
     button.addEventListener("click", (e) => {
       const productId = e.currentTarget.dataset.id;
 
-      removeProductFromCart(productId);
+      shoppingCart.removeProduct(productId);
 
       renderCartContents();
     });
   });
 }
 
-function removeProductFromCart(productId) {
+/*function removeProductFromCart(productId) {
   const cartItems = getLocalStorage("so-cart") || [];
   const newCartItems = cartItems.filter((item) => item.Id !== productId);
   setLocalStorage("so-cart", newCartItems);
@@ -61,6 +69,7 @@ function calcTotal() {
     cartTotal.innerHTML = `Total: $ ${total}`;
     cartFooter.classList.remove("hide");
   }
-}
+}*/
 
 renderCartContents();
+loadHeaderFooter();

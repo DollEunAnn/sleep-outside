@@ -1,5 +1,5 @@
 // Generate a list of product card in HTML
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate , calculateDiscount} from "./utils.mjs";
 
 export default class ProductList {
     constructor(category, dataSource, listElement) {
@@ -23,14 +23,23 @@ export default class ProductList {
     }
 }
 
+// If discount exists, render. If not, render nothing
 function productCardTemplate(product) {
-  console.log(product)
+
+  console.log(product);
+
+  // 1. calculate discount before rendering
+  const discount = calculateDiscount(product.ListPrice, product.FinalPrice);
+
   return `<li class="product-card">
     <a href="../product_pages/?product=${product.Id}">
       <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.Name}">
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.Name}</h3>
       <p class="product-card__price">$${product.ListPrice}</p>
+
+      <!-- display only if discount EXISTS -->
+      ${discount ? `<p class="discount">-${discount}%</p>` : ""}
     </a>
   </li>`
 }

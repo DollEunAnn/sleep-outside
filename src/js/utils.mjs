@@ -1,3 +1,5 @@
+// PURELY FOR FUNCTIONS = ALL THE OTHER EXTRA STUFF
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -38,5 +40,41 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
     parentElement.innerHTML = "";
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
+// DISCOUNT FUNCTION
+export function calculateDiscount(listPrice, finalPrice) {
+
+  //no diiscount
+  if (listPrice === finalPrice) {
+    return null;
+  }
+
+  const discountPercent = ((listPrice - finalPrice) / listPrice) * 100;
+
+  return Math.round(discountPercent);
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if(callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+ export function loadHeaderFooter() {
+  loadTemplate("/public/partials/header.html").then((template) => {
+    renderWithTemplate(template, qs("#header"));
+  });
+  loadTemplate("/public/partials/footer.html").then((template) => {
+    renderWithTemplate(template, qs("#footer"));
+    }
+  )
 }
 
