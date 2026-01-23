@@ -193,6 +193,7 @@ button {
 
 /* End product list card */
 
+/* Styles for product details */
 .product-detail {
   padding: 1em;
   max-width: 500px;
@@ -201,6 +202,33 @@ button {
 
 .product-detail img {
   width: 100%;
+}
+
+/* End product details styles */
+
+/* Styles for product listings */
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+}
+
+.categories img {
+  width: 100px;
+}
+
+.category-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.category-title {
+  text-transform: capitalize;
 }
 
 /* Start cart list card styles */
