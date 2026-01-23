@@ -1,26 +1,26 @@
 // Generate a list of product card in HTML
-import { renderListWithTemplate , calculateDiscount} from "./utils.mjs";
+import { renderListWithTemplate , calculateDiscount } from "./utils.mjs";
 
 export default class ProductList {
-    constructor(category, dataSource, listElement) {
-        this.category = category;
-        this.dataSource = dataSource;
-        this.listElement = listElement;
-    }
+  constructor(category, dataSource, listElement) {
+    this.category = category;
+    this.dataSource = dataSource;
+    this.listElement = listElement;
+  }
 
-    async init() {
-        const list = await this.dataSource.getData(this.category);
-        this.renderList(list);
-        document.querySelector(".category-title").textContent = this.category;
-    }
+  async init() {
+    const list = await this.dataSource.getData(this.category);
+    this.renderList(list);
+    document.querySelector(".category-title").textContent = this.category;
+  }
 
-    //reusable render
-    renderList(list) {
-        // const htmlStrings = list.map(productCardTemplate);
-        // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+  //reusable render
+  renderList(list) {
+    // const htmlStrings = list.map(productCardTemplate);
+    // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
 
-        renderListWithTemplate(productCardTemplate, this.listElement, list);
-    }
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
 }
 
 // If discount exists, render. If not, render nothing
