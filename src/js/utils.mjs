@@ -68,6 +68,36 @@ export async function loadTemplate(path) {
   return template;
 }
 
+// Inside src/js/utils.mjs
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart");
+  const countElement = qs(".cart-count");
+
+  if (countElement) {
+    // If we have items, calculate total quantity. If not, 0.
+    const totalCount = cartItems 
+      ? cartItems.reduce((sum, item) => sum + item.quantity, 0) 
+      : 0;
+
+    countElement.innerText = totalCount;
+    
+    // Show badge if count > 0, otherwise hide
+    countElement.style.display = totalCount > 0 ? "block" : "none";
+  }
+}
+
+export function animateCart() {
+  const cartIcon = qs(".cart"); // This targets the div surrounding the icon
+  if (cartIcon) {
+    cartIcon.classList.add("anim-out");
+    // Remove class after 500ms so animation can run again
+    setTimeout(() => {
+      cartIcon.classList.remove("anim-out");
+    }, 500);
+  }
+}
+
  export function loadHeaderFooter() {
   loadTemplate("/public/partials/header.html").then((template) => {
     renderWithTemplate(template, qs("#header"));
@@ -76,5 +106,15 @@ export async function loadTemplate(path) {
     renderWithTemplate(template, qs("#footer"));
     }
   )
+
+  const checkHeaderInterval = setInterval(() => {
+    const cartCountElement = document.querySelector(".cart-count");
+    
+    // Once the element exists in the HTML
+    if (cartCountElement) {
+      updateCartCount();
+      clearInterval(checkHeaderInterval); 
+    }
+  }, 50);
 }
 
