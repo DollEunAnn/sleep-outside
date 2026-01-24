@@ -298,3 +298,10 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* additional */
+.catergories {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
