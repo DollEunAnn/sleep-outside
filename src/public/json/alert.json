@@ -1,0 +1,17 @@
+[
+  {
+    "message": "Successfully added to cart.",
+    "background": "green",
+    "color": "black"
+  },
+  {
+    "message": "Encoutered an error.",
+    "background": "red",
+    "color": "white"
+  },
+  {
+    "message": "Updated.",
+    "background": "yellow",
+    "color": "black"
+  }
+]
