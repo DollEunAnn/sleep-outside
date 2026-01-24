@@ -69,10 +69,10 @@ export async function loadTemplate(path) {
 }
 
  export function loadHeaderFooter() {
-  loadTemplate("/public/partials/header.html").then((template) => {
+  loadTemplate("/partials/header.html").then((template) => {
     renderWithTemplate(template, qs("#header"));
   });
-  loadTemplate("/public/partials/footer.html").then((template) => {
+  loadTemplate("/partials/footer.html").then((template) => {
     renderWithTemplate(template, qs("#footer"));
  }
   )
