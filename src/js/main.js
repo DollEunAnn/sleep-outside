@@ -2,7 +2,7 @@ import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
-document.querySelectorAll(".categories a").forEach(link => {
+document.querySelectorAll(".categories a").forEach((link) => {
   const category = link.dataset.category;
   link.href = `product_listing/index.html?category=${category}`;
 });
