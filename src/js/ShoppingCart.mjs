@@ -38,7 +38,7 @@ export default class ShoppingCart {
             cartFooter.classList.add("hide");
         } else if (cartItems) {
             cartItems.forEach((product) => (total += product.ListPrice));
-            cartTotal.innerHTML = `Total: $ ${total}`;
+            cartTotal.innerHTML = `Total: $ ${total.toFixed(2)}`;
             cartFooter.classList.remove("hide");
         }
     }
@@ -54,10 +54,13 @@ function productCardTemplate(product) {
   return `<li class="cart-card divider">
     <button class="cart-card__remove" data-id="${product.Id}"></button>
     <a href="#" class="cart-card__image">
+    <picture>
+      <source media="(max-width: 480px)" srcset="${product.Images.PrimarySmall}"/>
       <img
-        src="${product.Image}"
+        src="${product.Images.PrimaryMedium}"
         alt="${product.Name}"
       />
+    </picture>
     </a>
     <a href="#">
       <h2 class="card__name">${product.Name}</h2>
