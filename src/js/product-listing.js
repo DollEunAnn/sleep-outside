@@ -1,6 +1,7 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
 import { getParam } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 const category = getParam("category");
 
@@ -19,3 +20,13 @@ if (categoryNameEl) {
     ? category.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "Products";
 }
+
+const productCountEl = document.getElementById("product-count");
+
+if (productCountEl) {
+  dataSource.getData(category).then((list) => {
+    productCountEl.textContent = `${list.length} items`;
+  });
+}
+
+loadHeaderFooter();
