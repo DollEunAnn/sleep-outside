@@ -60,9 +60,12 @@ export default class ProductDetails {
 
             <h2 class="divider">${product.NameWithoutBrand}</h2>
 
-            <img class="divider"
-                src="${product.Images.PrimaryLarge}"
-                alt="${product.Name}" />
+            <picture>
+                <source media="(max-width: 480px)" srcset="${product.Images.PrimaryLarge}"/>
+                <img class="divider"
+                    src="${product.Images.PrimaryExtraLarge}"
+                    alt="${product.Name}"/>
+            </picture>
 
             <p class="product-card__price">$${product.ListPrice}</p>
 
