@@ -5,6 +5,18 @@ import { loadHeaderFooter } from "./utils.mjs";
 
 const category = getParam("category");
 
+// Store category info in localStorage for breadcrumbs
+if (category) {
+  const categoryName = category
+    .replace("-", " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+  localStorage.setItem("lastCategory", categoryName);
+  localStorage.setItem(
+    "lastCategoryUrl",
+    `/product_listing/?category=${category}`,
+  );
+}
+
 const dataSource = new ProductData();
 
 const element = document.querySelector(".product-list");
