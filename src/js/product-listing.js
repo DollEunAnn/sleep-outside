@@ -11,3 +11,11 @@ const element = document.querySelector(".product-list");
 const myList = new ProductList(category, dataSource, element);
 
 myList.init();
+
+const categoryNameEl = document.getElementById("category-name");
+
+if (categoryNameEl) {
+  categoryNameEl.textContent = category
+    ? category.replace("-", " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : "Products";
+}
