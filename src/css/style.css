@@ -179,6 +179,76 @@ button {
   transform-origin: center center;
 }
 
+/* Breadcrumbs styles */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 0;
+  overflow: hidden;
+}
+
+.breadcrumbs a,
+.breadcrumbs span {
+  padding: 0.75rem 2rem 0.75rem 2.5rem;
+  background: #080808;
+  color: white;
+  text-decoration: none;
+  position: relative;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+  display: inline-block;
+}
+
+.breadcrumbs a:first-child {
+  padding-left: 1.5rem;
+  border-radius: 4px 0 0 4px;
+}
+
+/* Chevron arrow pointing right */
+.breadcrumbs a::after {
+  content: "";
+  position: absolute;
+  right: -1rem;
+  top: -1px;
+  width: 0;
+  height: 0;
+  border-top: 1.375rem solid transparent;
+  border-bottom: 1.375rem solid transparent;
+  border-left: 1rem solid #080808;
+  z-index: 1;
+  transition: border-color 0.3s;
+}
+
+/* Different color for category */
+.breadcrumbs a:nth-child(3) {
+  background: #834001;
+}
+
+.breadcrumbs a:nth-child(3)::after {
+  border-left-color: #834001;
+}
+
+/* Current page (last span) */
+.breadcrumbs span:last-child {
+  background: #b15e10;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Hide separator spans (›) */
+.breadcrumbs > span:not(:last-child) {
+  display: none;
+}
+
+/* Hover effect */
+.breadcrumbs a:hover {
+  background: #1976d2;
+}
+
+.breadcrumbs a:hover::after {
+  border-left-color: #1976d2;
+}
+
 /* End cart icon styles */
 
 .mission {

@@ -71,5 +71,23 @@ function calcTotal() {
   }
 }*/
 
+// Update breadcrumb with previous category
+function updateBreadcrumb() {
+  const categoryName = localStorage.getItem("lastCategory");
+  const categoryUrl = localStorage.getItem("lastCategoryUrl");
+  const breadcrumbLink = document.getElementById("previous-category");
+  const breadcrumbSpan = breadcrumbLink?.previousElementSibling; // The › separator
+
+  if (categoryName && categoryUrl && breadcrumbLink) {
+    breadcrumbLink.textContent = categoryName;
+    breadcrumbLink.href = categoryUrl;
+  } else if (breadcrumbLink) {
+    // If no previous category, hide this breadcrumb segment
+    breadcrumbLink.style.display = "none";
+    if (breadcrumbSpan) breadcrumbSpan.style.display = "none";
+  }
+}
+
 renderCartContents();
+updateBreadcrumb();
 loadHeaderFooter();

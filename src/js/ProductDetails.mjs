@@ -1,16 +1,19 @@
 import { getLocalStorage, setLocalStorage, updateCartCount, animateCart } from "./utils.mjs";
 
 export default class ProductDetails {
-    constructor(productId, dataSource) {
-        this.productId = productId;
-        this.product = {};
-        this.dataSource = dataSource;
+    constructor(productId, dataSource, category) {
+    this.productId = productId;
+    this.product = {};
+    this.dataSource = dataSource;
+    this.category = category;
     }
 
     async init() {
         this.product = await this.dataSource.findProductById(this.productId);
         this.renderProductDetails();
+         this.renderBreadcrumb()
         // add listener to Add to Cart button
+        console.log("Product category:", this.product.Category); // Add this
         document
         .getElementById("addToCart")
         .addEventListener('click', this.addProductToCart.bind(this));
@@ -53,6 +56,30 @@ export default class ProductDetails {
     renderProductDetails() {
         this.productDetailsTemplate(this.product)
     }
+
+renderBreadcrumb() {
+    const categoryLink = document.getElementById("breadcrumb-category");
+    const productNameEl = document.getElementById("breadcrumb-product");
+
+    if (!categoryLink || !productNameEl) return;
+    if (!this.product || !this.product.Name) return;
+
+    // Use the product's actual category instead of URL param
+    const category = this.product.Category || this.category || "products";
+    
+    // Format category name (backpacks → Backpacks)
+    const formattedCategory = category
+        .replace("-", " ")
+        .replace(/\b\w/g, c => c.toUpperCase());
+
+    categoryLink.textContent = formattedCategory;
+    categoryLink.href = `../product_listing/index.html?category=${category}`;
+
+    productNameEl.textContent = this.product.Name;
+
+    // Update page title
+    document.title = `Sleep Outside | ${this.product.Name}`;
+}
 
     productDetailsTemplate(product) {
         const template =
