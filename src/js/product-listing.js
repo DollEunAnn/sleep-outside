@@ -3,6 +3,9 @@ import ProductList from "./ProductList.mjs";
 import { getParam } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
+loadHeaderFooter();
+
+// order
 const category = getParam("category");
 
 // Store category info in localStorage for breadcrumbs
