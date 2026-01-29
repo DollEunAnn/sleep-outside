@@ -18,6 +18,46 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <span id="subtotal"></span>
+        <span id="tax"></span>
+        <span id="shipping"></span>
+        <span id="total"></span>
+      </section>
+      <section class="checkout-form">
+        <form action="">
+          <fieldset>
+            <legend>Customer details</legend>
+            <label for="fname">First name</label>
+            <input type="fname" name="fname" id="fname" required>
+
+            <label for="lname">Last name</label>
+            <input type="lname" for="lname" id="lname" required>
+
+            <label for="streetadr">Street address</label>
+            <input type="address" for="streetadr" id="streetadr" required>
+
+            <label for="city">City</label>
+            <input type="city" for="city" id="city" required>
+
+            <label for="state">State</label>
+            <input type="state" for="state" id="state" required>
+
+            <label for="zipcode">Zip Code</label>
+            <input type="zip" for="zipcode" id="zipcode" required>
+          </fieldset>
+          <fieldset>
+            <legend>Payment details</legend>
+            <label for="cc-number"></label>
+            <input type="text" name="cc-number" id="cc-number" required>
+
+            <label for="cc-exp"></label>
+            <input type="text" name="cc-exp" id="cc-exp" required>
+
+            <label for="cc-csc"></label>
+            <input type="password" name="cc-csc" id="cc-csc" required>
+          </fieldset>
+          <button>Checkout</button>
+        </form>
       </section>
     </main>
 
