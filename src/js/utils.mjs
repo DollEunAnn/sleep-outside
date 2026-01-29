@@ -118,3 +118,11 @@ export function animateCart() {
   }, 50);
 }
 
+// banner animation
+window.addEventListener("load", () => {
+  const banner = document.querySelector(".banner-wrapper");
+
+  setTimeout(() => {
+    banner.classList.add("show");
+  }, 300);
+})
