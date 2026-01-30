@@ -463,7 +463,10 @@ button {
   color: white;
 }
 
-.checkout__name, .checkout__address, .checkout__payment, .order__summary {
+.checkout__name,
+.checkout__address,
+.checkout__payment,
+.order__summary {
   display: flex;
   flex-direction: column;
   margin: 0 10px 0 10px;
