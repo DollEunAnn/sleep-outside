@@ -27,6 +27,8 @@ export default class ShoppingCart {
         const cartItems = getLocalStorage(this.shoppingCart) || [];
         const newCartItems = cartItems.filter((item) => item.Id !== productId);
         setLocalStorage(this.shoppingCart, newCartItems);
+        updateCartCount();
+        animateCart();
     }
 
     // Update quantity by a given change (add or subtract)
