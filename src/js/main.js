@@ -1,4 +1,4 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 import Alert from "./alert.js";
@@ -8,7 +8,7 @@ document.querySelectorAll(".categories a").forEach((link) => {
   link.href = `product_listing/index.html?category=${category}`;
 });
 
-const dataSource = new ProductData("tents");
+const dataSource = new ExternalServices("tents");
 
 const element = document.querySelector(".product-list");
 

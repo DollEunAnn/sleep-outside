@@ -281,6 +281,10 @@ button {
   justify-content: center;
 }
 
+.product-list.cart {
+  flex-flow: column;
+}
+
 .product-list a {
   text-decoration: none;
   color: var(--dark-grey);
@@ -413,6 +417,69 @@ button {
 
 .cart-footer.hide {
   display: none;
+}
+
+#checkout {
+  padding: 0.5em 2em;
+  background-color: var(--secondary-color);
+  color: white;
+  margin: auto;
+  display: block;
+  width: fit-content;
+  border: 0;
+  font-size: var(--large-font);
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+/* Start checkout styles */
+.checkout-form {
+  padding: 10px;
+}
+
+.checkout-form input {
+  margin: 2px 0 10px 0;
+  padding: 8px;
+}
+
+.checkout-form input:valid {
+  border-bottom: 5px solid green;
+}
+
+.checkout- {
+  margin: 0 10px 0 10px;
+}
+
+.checkout-form fieldset {
+  margin-bottom: 20px;
+}
+
+.checkout-form legend {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  padding: 10px;
+  background-color: var(--dark-grey);
+  color: white;
+}
+
+.checkout__name, .checkout__address, .checkout__payment, .order__summary {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px 0 10px;
+}
+
+.order__summary #num-items,
+.order__summary #cartTotal,
+.order__summary #tax,
+.order__summary #shipping,
+.order__summary #orderTotal {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.order__summary #orderTotal {
+  font-size: 24px;
 }
 
 /* DISCOUNT FLAG CSS */
