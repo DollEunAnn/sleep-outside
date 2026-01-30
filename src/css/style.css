@@ -477,6 +477,7 @@ button {
 }
 .cart-grid li {
   text-align: center;
+  width: 100%;
 }
 
 .cart-grid li a {
