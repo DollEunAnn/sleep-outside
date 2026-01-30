@@ -1,4 +1,4 @@
-import { renderListWithTemplate , calculateDiscount, getLocalStorage, setLocalStorage} from "./utils.mjs";
+import { renderListWithTemplate , calculateDiscount, getLocalStorage, setLocalStorage, updateCartCount, animateCart } from "./utils.mjs";
 
 export default class ShoppingCart {
   constructor(shoppingCart, listElement) {
@@ -50,7 +50,7 @@ export default class ShoppingCart {
                         return item;
                     }
                 }
-                
+
                 // Update quantity normally
                 return { ...item, quantity: newQuantity };
             }
@@ -61,6 +61,8 @@ export default class ShoppingCart {
         
         if (shouldUpdate) {
             setLocalStorage(this.shoppingCart, filteredItems);
+            updateCartCount();
+            animateCart();
         }
     }
 
