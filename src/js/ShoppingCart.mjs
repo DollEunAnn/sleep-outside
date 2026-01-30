@@ -127,7 +127,7 @@ function productCardTemplate(product) {
 return `
 <ul class="cart-grid divider">
   <li class="cart-product-details-grid">
-    <a href="#" class="cart-card__image">
+    <a href="../product_pages/?product=${product.Id}" class="cart-card__image">
       <picture>
         <source media="(max-width: 480px)" srcset="${product.Images.PrimarySmall}"/>
         <img
@@ -137,7 +137,7 @@ return `
       </picture>
     </a>
     <div>
-      <a href="#">
+      <a href="../product_pages/?product=${product.Id}">
         <h2 class="card__name">${product.Name}</h2>
       </a>
       <p class="cart-card__color">Color: ${product.Colors[0].ColorName}</p>
