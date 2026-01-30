@@ -51,22 +51,36 @@ function productCardTemplate(product) {
   // 1. calculate discount before rendering
   const discount = calculateDiscount(product.ListPrice, product.FinalPrice);
 
-  return `<li class="cart-card divider">
-    <button class="cart-card__remove" data-id="${product.Id}"></button>
+return `<li class="cart-card divider">
+  <div class="cart-card__product">
     <a href="#" class="cart-card__image">
-    <picture>
-      <source media="(max-width: 480px)" srcset="${product.Images.PrimarySmall}"/>
-      <img
-        src="${product.Images.PrimaryMedium}"
-        alt="${product.Name}"
-      />
-    </picture>
+      <picture>
+        <source media="(max-width: 480px)" srcset="${product.Images.PrimarySmall}"/>
+        <img
+          src="${product.Images.PrimaryMedium}"
+          alt="${product.Name}"
+        />
+      </picture>
     </a>
-    <a href="#">
-      <h2 class="card__name">${product.Name}</h2>
-    </a>
-    <p class="cart-card__color">${product.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">${product.quantity}</p>
-    <p class="cart-card__price">$${product.FinalPrice}</p>
-  </li>`
+    <div class="cart-card__details">
+      <a href="#">
+        <h2 class="card__name">${product.Name}</h2>
+      </a>
+      <p class="cart-card__color">Color: ${product.Colors[0].ColorName}</p>
+      <p class="cart-card__size">Size: ${product.Size || '6.0'}</p>
+    </div>
+  </div>
+  
+  <p class="cart-card__price">$${product.FinalPrice}</p>
+  
+  <div class="cart-card__quantity">
+    <button class="quantity-btn decrease" data-id="${product.Id}">-</button>
+    <span class="quantity-value">${product.quantity}</span>
+    <button class="quantity-btn increase" data-id="${product.Id}">+</button>
+  </div>
+  
+  <p class="cart-card__subtotal">$${(product.FinalPrice * product.quantity).toFixed(2)}</p>
+  
+  <button class="cart-card__remove" data-id="${product.Id}">🗑</button>
+</li>`
 }

@@ -315,6 +315,18 @@ button {
 
 /* End product list card */
 
+/* Styles for cart product lists */
+.cart-product-list {
+  flex-flow: row wrap;
+  list-style-type: none;
+  justify-content: center;
+}
+.cart-product-list a {
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+/* End cart product list styles */
+
 /* Styles for product details */
 .product-detail {
   padding: 1em;
