@@ -330,6 +330,14 @@ button {
 /* End product details styles */
 
 /* Styles for product listings */
+.prod-categories {
+  margin: 20px;
+}
+
+.prod-categories h2 {
+  text-align: center;
+  margin: 20px;
+}
 
 .categories {
   display: flex;
