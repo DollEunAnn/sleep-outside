@@ -544,7 +544,8 @@ button {
   display: none;
 }
 
-#checkout, .cta-button {
+#checkout,
+.cta-button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
