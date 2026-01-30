@@ -1,6 +1,6 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter , animateBanner } from "./utils.mjs";
 import Alert from "./alert.js";
 
 document.querySelectorAll(".categories a").forEach((link) => {
@@ -20,3 +20,7 @@ productList.init();
 alert.showAlert();
 
 loadHeaderFooter();
+
+window.addEventListener("load", () => {
+  animateBanner();
+});

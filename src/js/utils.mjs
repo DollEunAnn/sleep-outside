@@ -34,7 +34,7 @@ export function getParam(param) {
 
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
   const htmlStrings = list.map(templateFn);
-  
+
   // if clear is true we need to clear out the contents of the parent.
   if (clear) {
     parentElement.innerHTML = "";
@@ -57,7 +57,7 @@ export function calculateDiscount(listPrice, finalPrice) {
 
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
-  if(callback) {
+  if (callback) {
     callback(data);
   }
 }
@@ -76,12 +76,12 @@ export function updateCartCount() {
 
   if (countElement) {
     // If we have items, calculate total quantity. If not, 0.
-    const totalCount = cartItems 
-      ? cartItems.reduce((sum, item) => sum + item.quantity, 0) 
+    const totalCount = cartItems
+      ? cartItems.reduce((sum, item) => sum + item.quantity, 0)
       : 0;
 
     countElement.innerText = totalCount;
-    
+
     // Show badge if count > 0, otherwise hide
     countElement.style.display = totalCount > 0 ? "block" : "none";
   }
@@ -98,31 +98,45 @@ export function animateCart() {
   }
 }
 
- export function loadHeaderFooter() {
+export function loadHeaderFooter() {
   loadTemplate("../partials/header.html").then((template) => {
     renderWithTemplate(template, qs("#header"));
   });
   loadTemplate("../partials/footer.html").then((template) => {
     renderWithTemplate(template, qs("#footer"));
-    }
+  }
   )
 
   const checkHeaderInterval = setInterval(() => {
     const cartCountElement = document.querySelector(".cart-count");
-    
+
     // Once the element exists in the HTML
     if (cartCountElement) {
       updateCartCount();
-      clearInterval(checkHeaderInterval); 
+      clearInterval(checkHeaderInterval);
     }
   }, 50);
 }
 
 // banner animation
-window.addEventListener("load", () => {
-  const banner = document.querySelector(".banner-wrapper");
+export function animateBanner() {
+  const banner = qs(".banner-wrapper");
+  const closeBtn = qs("#closeBtn");
 
-  setTimeout(() => {
-    banner.classList.add("show");
-  }, 300);
-})
+  const bannerSeen = getLocalStorage("bannerSeen"); // look for "bannerSeen" key
+
+  if (!bannerSeen) {
+    // display banner if no key found
+    setTimeout(() => {
+      banner.classList.add("show");
+    }, 300);
+
+    if (closeBtn) {
+      setClick("#closeBtn", () => {
+        banner.classList.remove("show");
+        setLocalStorage("bannerSeen", true);
+      });
+    }
+
+  };
+}

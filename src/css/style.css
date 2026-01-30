@@ -455,6 +455,15 @@ button {
   background-color: rgb(255, 255, 255);
 }
 
+.banner {
+  display: flex;
+  justify-content: space-between;
+}
+
+#closeBtn {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
