@@ -114,6 +114,20 @@ button {
   border-bottom: 2px solid var(--primary-color);
 }
 
+.alert {
+  display: flex;
+  align-items: center;
+  background-color: var(--secondary-color);
+  color: white;
+  width: fit-content;
+  padding-right: 10px;
+  justify-self: center;
+}
+
+.alert .alertX {
+  cursor: pointer;
+}
+
 /* End utility classes */
 
 /* Cart icon styles */
@@ -500,6 +514,12 @@ button {
   border-radius: 6px;
   color: white;
   font-weight: bold;
+  text-align: center;
+}
+
+/* Success page styles */
+.success {
+  padding: 20px;
   text-align: center;
 }
 
