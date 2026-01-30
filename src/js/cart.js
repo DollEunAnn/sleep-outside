@@ -10,10 +10,26 @@ const shoppingCart = new ShoppingCart("so-cart", element);
 function renderCartContents() {
   const cartItems = shoppingCart.getProducts();
   element.innerHTML = "";
-  shoppingCart.renderList(cartItems);
-  addRemoveButtonListeners();
-  addQuantityButtonListeners();
-  shoppingCart.getTotal();
+
+    
+  // Check if cart is empty
+  if (!cartItems || cartItems.length === 0) {
+    // Show empty cart message
+    element.innerHTML = '<div class="empty-cart-message"><p>Your cart is currently empty</p></div>';
+    element.innerHTML += '<a href="../index.html" class="cta-button">See Products</a>';
+    
+    // Hide cart header and footer
+    document.querySelector(".cart-header").style.display = "none";
+    document.querySelector(".cart-footer").classList.add("hide");
+    document.getElementById("checkout").style.display = "none"; 
+  } else {
+    // Show cart items
+    document.querySelector(".cart-header").style.display = "grid"; 
+    shoppingCart.renderList(cartItems);
+    addRemoveButtonListeners();
+    addQuantityButtonListeners();
+    shoppingCart.getTotal();
+  } 
 }
 
 /*function cartItemTemplate(item) {
