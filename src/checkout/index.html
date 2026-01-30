@@ -8,7 +8,7 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/checkout.js" type="module"></script>
   </head>
 
@@ -18,6 +18,83 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+      </section>
+      <section class="checkout-form">
+        <form name="checkout">
+          <fieldset>
+            <legend>Customer details</legend>
+            <div class="checkout__name">
+              <label for="fname">First name</label>
+              <input type="text" name="fname" id="fname" required />
+
+              <label for="lname">Last name</label>
+              <input type="text" name="lname" id="lname" required />
+            </div>
+            <div class="checkout__address">
+              <label for="street">Street address</label>
+              <input type="text" name="street" id="streetadr" required />
+
+              <label for="city">City</label>
+              <input type="text" name="city" id="city" required />
+
+              <label for="state">State</label>
+              <input type="text" name="state" id="state" required />
+
+              <label for="zip">Zip Code</label>
+              <input type="text" name="zip" id="zipcode" required />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment details</legend>
+            <div class="checkout__payment">
+              <label for="cardNumber">Card Number</label>
+              <input
+                type="text"
+                name="cardNumber"
+                id="cc-number"
+                value="1234123412341234"
+                required
+              />
+
+              <label for="expiration">Expiry Date</label>
+              <input
+                type="text"
+                name="expiration"
+                id="cc-exp"
+                value="04/27"
+                required
+              />
+
+              <label for="code">Security Code</label>
+              <input
+                type="current-password"
+                name="code"
+                id="cc-csc"
+                value="123"
+                required
+              />
+            </div>
+          </fieldset>
+
+          <fieldset class="checkout-summary">
+            <legend>Order Summary</legend>
+
+            <div class="order__summary">
+              <div>Items</div>
+              <div id="num-items"></div>
+              <div>Subtotal</div>
+              <div id="cartTotal"></div>
+              <div>Tax</div>
+              <div id="tax"></div>
+              <div>Shipping</div>
+              <div id="shipping"></div>
+              <div>Total</div>
+              <div id="orderTotal"></div>
+            </div>
+          </fieldset>
+          <button type="submit" id="checkoutSubmit">Checkout</button>
+        </form>
       </section>
     </main>
 
