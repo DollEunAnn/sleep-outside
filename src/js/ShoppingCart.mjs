@@ -29,20 +29,93 @@ export default class ShoppingCart {
         setLocalStorage(this.shoppingCart, newCartItems);
     }
 
-    getTotal() {
-        const cartItems = getLocalStorage(this.shoppingCart);
-        const cartTotal = document.querySelector(".cart-total");
-        const cartFooter = document.querySelector(".cart-footer");
-        let total = 0;
-        if (!cartItems || cartItems.length == 0) {
-            cartFooter.classList.add("hide");
-        } else if (cartItems) {
-            cartItems.forEach((product) => (total += product.ListPrice));
-            cartTotal.innerHTML = `Total: $ ${total.toFixed(2)}`;
-            cartFooter.classList.remove("hide");
+    // Update quantity by a given change (add or subtract)
+    async updateQuantity(productId, change) {
+        const cartItems = getLocalStorage(this.shoppingCart) || [];
+        let shouldUpdate = true;
+        
+        const updatedItems = await Promise.all(cartItems.map(async item => {
+            if (item.Id === productId) {
+                const newQuantity = item.quantity + change;
+                
+                // If quantity would be 0 or less, show custom modal
+                if (newQuantity <= 0) {
+                    const confirmRemove = await this.showConfirmModal(`Do you want to remove ${item.Name} from your cart?`);
+                    if (confirmRemove) {
+                        // Return null to mark for removal
+                        return null;
+                    } else {
+                        // Keep quantity at 1
+                        shouldUpdate = false;
+                        return item;
+                    }
+                }
+                
+                // Update quantity normally
+                return { ...item, quantity: newQuantity };
+            }
+            return item;
+        }));
+        
+        const filteredItems = updatedItems.filter(item => item !== null);
+        
+        if (shouldUpdate) {
+            setLocalStorage(this.shoppingCart, filteredItems);
         }
     }
+
+    // ========== NEW METHOD - Custom Modal ==========
+    showConfirmModal(message) {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('confirmModal');
+            const modalMessage = document.getElementById('modalMessage');
+            const confirmBtn = document.getElementById('modalConfirm');
+            const cancelBtn = document.getElementById('modalCancel');
+            
+            modalMessage.textContent = message;
+            modal.classList.add('active');
+            
+            const handleConfirm = () => {
+                modal.classList.remove('active');
+                cleanup();
+                resolve(true);
+            };
+            
+            const handleCancel = () => {
+                modal.classList.remove('active');
+                cleanup();
+                resolve(false);
+            };
+            
+            const cleanup = () => {
+                confirmBtn.removeEventListener('click', handleConfirm);
+                cancelBtn.removeEventListener('click', handleCancel);
+            };
+            
+            confirmBtn.addEventListener('click', handleConfirm);
+            cancelBtn.addEventListener('click', handleCancel);
+        });
+    }
+
+// Calculate and display total price
+getTotal() {
+    const cartItems = getLocalStorage(this.shoppingCart);
+    const cartTotal = document.querySelector(".cart-total");
+    const cartFooter = document.querySelector(".cart-footer");
+    let total = 0;
+    
+    if (!cartItems || cartItems.length == 0) {
+        cartFooter.classList.add("hide");
+    } else if (cartItems) {
+        cartItems.forEach((product) => {
+            total += (product.ListPrice || 0) * (product.quantity || 1);
+        });
+        cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
+        cartFooter.classList.remove("hide");
+    }
 }
+}
+
 
 function productCardTemplate(product) {
 
@@ -51,8 +124,9 @@ function productCardTemplate(product) {
   // 1. calculate discount before rendering
   const discount = calculateDiscount(product.ListPrice, product.FinalPrice);
 
-return `<li class="cart-card divider">
-  <div class="cart-card__product">
+return `
+<ul class="cart-grid divider">
+  <li class="cart-product-details-grid">
     <a href="#" class="cart-card__image">
       <picture>
         <source media="(max-width: 480px)" srcset="${product.Images.PrimarySmall}"/>
@@ -62,25 +136,29 @@ return `<li class="cart-card divider">
         />
       </picture>
     </a>
-    <div class="cart-card__details">
+    <div>
       <a href="#">
         <h2 class="card__name">${product.Name}</h2>
       </a>
       <p class="cart-card__color">Color: ${product.Colors[0].ColorName}</p>
       <p class="cart-card__size">Size: ${product.Size || '6.0'}</p>
     </div>
-  </div>
-  
-  <p class="cart-card__price">$${product.FinalPrice}</p>
-  
-  <div class="cart-card__quantity">
-    <button class="quantity-btn decrease" data-id="${product.Id}">-</button>
-    <span class="quantity-value">${product.quantity}</span>
-    <button class="quantity-btn increase" data-id="${product.Id}">+</button>
-  </div>
-  
-  <p class="cart-card__subtotal">$${(product.FinalPrice * product.quantity).toFixed(2)}</p>
-  
-  <button class="cart-card__remove" data-id="${product.Id}">🗑</button>
-</li>`
+  </li>
+  <li>
+    <p class="cart-card__price">$${product.FinalPrice}</p>
+  </li>
+  <li>
+    <div class="cart-card__quantity">
+      <button class="quantity-btn decrease" data-id="${product.Id}">-</button>
+      <span class="quantity-value">${product.quantity}</span>
+      <button class="quantity-btn increase" data-id="${product.Id}">+</button>
+    </div>
+    
+  </li>
+  <li>
+    <p class="cart-card__subtotal">$${(product.FinalPrice * product.quantity).toFixed(2)}</p>
+    <button class="cart-card__remove" data-id="${product.Id}">🗑</button>
+  </li>
+</ul>`
 }
+

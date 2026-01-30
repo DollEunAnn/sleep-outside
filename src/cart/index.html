@@ -1,43 +1,58 @@
 <!doctype html>
 
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Cart</title>
 
-  <title>Sleep Outside | Cart</title>
+    <link rel="stylesheet" href="/css/style.css" />
 
-  <link rel="stylesheet" href="/css/style.css" />
+    <script src="../js/cart.js" type="module"></script>
+  </head>
 
-  <script src="../js/cart.js" type="module"></script>
-</head>
+  <body>
+    <header class="divider" id="header"></header>
 
-<body>
-  <header class="divider" id="header"></header>
+    <main class="divider">
+      <nav class="breadcrumbs">
+        <a href="/">Home</a>
+        <span>›</span>
+        <a href="#" id="previous-category"></a>
+      </nav>
+      <section class="products">
+        <h2 class="divider">My Cart</h2>
+        <ul class="cart-grid cart-header">
+          <li>Item</li>
+          <li>Price</li>
+          <li>Quantity</li>
+          <li>Subtotal</li>
+        </ul>
+        <div class="cart-product-list"></div>
 
-  <main class="divider">
-    <nav class="breadcrumbs">
-      <a href="/">Home</a>
-      <span>›</span>
-      <a href="#" id="previous-category"></a>
-    </nav>
-    <section class="products">
-      <h2>My Cart</h2>
+        <div class="cart-footer hide">
+          <p class="cart-total">Total:</p>
+        </div>
+      </section>
+      <a href="../checkout/index.html" id="checkout">Checkout</a>
+    </main>
 
-      <ul class="product-list cart"></ul>
-
-      <ul class="cart-product-list"></ul>
-
-      <div class="cart-footer hide">
-        <p class="cart-total">Total:</p>
+    <footer id="footer"></footer>
+    <div class="modal-overlay" id="confirmModal">
+      <div class="modal-content">
+        <h3>Remove Item?</h3>
+        <p id="modalMessage"></p>
+        <div class="modal-buttons">
+          <button class="modal-btn modal-btn-cancel" id="modalCancel">
+            Cancel
+          </button>
+          <button class="modal-btn modal-btn-confirm" id="modalConfirm">
+            Remove
+          </button>
+        </div>
       </div>
-    </section>
-    <a href="../checkout/index.html" id="checkout">Checkout</a>
-  </main>
-
-  <footer id="footer"></footer>
-</body>
-
+    </div>
+  </body>
 </html>
