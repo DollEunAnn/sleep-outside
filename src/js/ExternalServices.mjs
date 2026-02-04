@@ -1,16 +1,22 @@
 const baseURL = import.meta.env.VITE_SERVER_URL
 
-function convertToJson(res) {
+async function convertToJson(res) {
   if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Bad Response");
+    // console.log("Response status:", res.status) 
+    const data = await res.json(); // reading data once
+    if (res.ok) {
+      return res.json();
+    }
+    else {
+      const message = data.message || data.error || "Bad response";
+      throw new Error(message);
+    }
   }
 }
 
 export default class ExternalServices {
   constructor() {
-    
+
   }
 
   async getData(category) {
@@ -33,6 +39,7 @@ export default class ExternalServices {
       },
       body: JSON.stringify(payload),
     };
+    
     return await fetch(`${baseURL}checkout/`, options).then(convertToJson);
   }
 }
