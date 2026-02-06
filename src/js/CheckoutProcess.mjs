@@ -1,7 +1,9 @@
 import { getLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
+import Alert from "./alert.js";
 
-const services = new ExternalServices(); 
+const services = new ExternalServices();
+const alert = new Alert() 
 
 function formDataToJSON(formElement) {
   const formData = new FormData(formElement),
@@ -88,9 +90,16 @@ export default class CheckoutProcess {
 
     try {
         const response = await services.checkout(order);
+
+        localStorage.removeItem("so-cart");
+        window.location.href = "/checkout/success.html"
         console.log(response);
     } catch (err) {
-        console.log(err);
+        removeAllAlerts();
+
+        for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
     }
   }
 }
