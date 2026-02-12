@@ -118,3 +118,20 @@ export function animateCart() {
   }, 50);
 }
 
+// color choose for swatches
+export function swatchColorChoose() {
+  document.querySelectorAll("product.card").forEach(card => {
+    const mainImage = card.querySelector(".main-image");
+    const swatches = card.querySelectorAll(".swatch");
+
+    swatches.forEach(swatch => {
+      swatch.addEventListener("click", () => {
+        mainImage.src = swatch.dataset.image;
+
+        // highlighting selected swatch
+        swatches.forEach(s => s.classList.remove("selected"));
+        swatch.classList.add("selected");
+      })
+    })
+  })
+}
