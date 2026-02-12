@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -138,9 +138,12 @@ button {
 /* --- Superscript Number Badge --- */
 .cart-count {
   position: absolute;
-  top: 10px; /* Positions it vertically on top of the icon */
-  right: -5px; /* Positions it slightly to the right of the icon */
-  background-color: #de4747; /* Red color to grab attention */
+  top: 10px;
+  /* Positions it vertically on top of the icon */
+  right: -5px;
+  /* Positions it slightly to the right of the icon */
+  background-color: #de4747;
+  /* Red color to grab attention */
   color: white;
   font-size: 0.7rem;
   font-weight: bold;
@@ -150,8 +153,10 @@ button {
   line-height: 15px;
   text-align: center;
   z-index: 10;
-  display: none; /* Hidden by default, JS will show it if > 0 */
-  pointer-events: none; /* Allows clicks to pass through to the link */
+  display: none;
+  /* Hidden by default, JS will show it if > 0 */
+  pointer-events: none;
+  /* Allows clicks to pass through to the link */
 }
 
 /* --- Backpack Shake Animation --- */
@@ -159,15 +164,19 @@ button {
   0% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(15deg);
   }
+
   50% {
     transform: rotate(-15deg);
   }
+
   75% {
     transform: rotate(5deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
@@ -236,7 +245,7 @@ button {
 }
 
 /* Hide separator spans (›) */
-.breadcrumbs > span:not(:last-child) {
+.breadcrumbs>span:not(:last-child) {
   display: none;
 }
 
@@ -522,4 +531,18 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+/* COLOR SWATCHES */
+.color-swatches {
+  display: flex;
+  margin-top: 5px;
+  justify-content: space-between;
+}
+
+.swatch {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 }
