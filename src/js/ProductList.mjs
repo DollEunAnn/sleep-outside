@@ -1,5 +1,7 @@
 // Generate a list of product card in HTML
-import { renderListWithTemplate , calculateDiscount} from "./utils.mjs";
+import { renderListDOM , calculateDiscount} from "./utils.mjs";
+import { showQuickView } from "./quickView.js";
+
 
 export default class ProductList {
     constructor(category, dataSource, listElement) {
@@ -19,7 +21,7 @@ export default class ProductList {
         // const htmlStrings = list.map(productCardTemplate);
         // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
 
-        renderListWithTemplate(productCardTemplate, this.listElement, list);
+        renderListDOM(productCardTemplate, this.listElement, list);
     }
 }
 
@@ -76,8 +78,17 @@ function productCardTemplate(product) {
   // append picture, brand, name, price to link
   link.append(picture, brand, name, price);
 
-  // append link a to li
-  li.append(link);
+  // quick view button
+  const button = document.createElement("button");
+  button.className = "quick-view";
+  button.dataset.id = product.Id;
+  button.textContent = "Quick View";
 
+
+  button.addEventListener("click", () => showQuickView(product));
+  
+  // append link a to li
+  li.append(link, button);
   return li;
+  
 }

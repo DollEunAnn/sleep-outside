@@ -3,6 +3,9 @@ import ProductList from "./ProductList.mjs";
 import { getParam } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
+const closeModal = document.getElementById("closeModal");
+const modal = document.getElementById("quickViewModal");
+
 loadHeaderFooter();
 
 // order
@@ -45,3 +48,7 @@ if (productCountEl) {
 }
 
 loadHeaderFooter();
+
+closeModal.addEventListener("click", () => {
+  modal.close();
+});

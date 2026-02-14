@@ -523,3 +523,30 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* For Modal */
+.modal-content {
+  width: auto;
+  margin: auto;
+  padding: 2em;
+}
+
+#quickViewModal {
+  position: fixed;
+  inset: 0;
+  margin: auto; /* centers horizontally + vertically */
+  padding: 1.5rem;
+  border: none;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+}
+
+#quickViewModal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#closeModal {
+  display: flex;
+  justify-items: right;
+}
