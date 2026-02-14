@@ -23,40 +23,18 @@
         <a href="#" id="previous-category"></a>
       </nav>
       <section class="products">
-        <h2>My Cart</h2>
-
-        <ul class="product-list cart">
-          <!-- <li class="cart-card divider">
-            <a href="product_pages/marmot-ajax-3.html" class="cart-card__image">
-              <img
-                src="images/tents/marmot-ajax-tent-3-person-3-season-in-pale-pumpkin-terracotta~p~880rr_01~320.jpg"
-                alt="Marmot Ajax tent"
-              />
-            </a>
-            <a href="product_pages/marmot-ajax-3.html">
-              <h2 class="card__name">Marmot Ajax Tent - 3-Person, 3-Season</h2>
-            </a>
-            <p class="cart-card__color">Pale Pumpkin/Terracotta</p>
-            <p class="cart-card__quantity">qty: 1</p>
-            <p class="cart-card__price">$199.99</p>
-          </li>
-          <li class="cart-card divider">
-            <a href="product_pages/marmot-ajax-3.html" class="cart-card__image">
-              <img
-                src="images/tents/the-north-face-talus-tent-4-person-3-season-in-golden-oak-saffron-yellow~p~985rf_01~320.jpg"
-                alt="Talus Tent - 4-Person, 3-Season"
-              />
-            </a>
-            <a href="product_pages/marmot-ajax-3.html">
-              <h2 class="card__name">
-                The North Face Talus Tent - 4-Person, 3-Season
-              </h2></a
-            >
-            <p class="cart-card__color">Golden Oak/Saffron Yellow</p>
-            <p class="cart-card__quantity">qty: 1</p>
-            <p class="cart-card__price">$199.99</p>
-          </li> -->
+        <h2 class="divider">Your Cart</h2>
+        <ul class="cart-grid cart-header">
+          <li>Item</li>
+          <li>Price</li>
+          <li>Quantity</li>
+          <li>Subtotal</li>
         </ul>
+        <div class="cart-product-list"></div>
+        <div class="empty-cart-message" style="display: none">
+          <p>Your cart is currently empty</p>
+          <a href="../index.html" class="cta-button">See Products</a>
+        </div>
         <div class="cart-footer hide">
           <p class="cart-total">Total:</p>
         </div>
@@ -65,5 +43,19 @@
     </main>
 
     <footer id="footer"></footer>
+    <div class="modal-overlay" id="confirmModal">
+      <div class="modal-content">
+        <h3>Remove Item?</h3>
+        <p id="modalMessage"></p>
+        <div class="modal-buttons">
+          <button class="modal-btn modal-btn-cancel" id="modalCancel">
+            Cancel
+          </button>
+          <button class="modal-btn modal-btn-confirm" id="modalConfirm">
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

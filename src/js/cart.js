@@ -3,18 +3,31 @@ import { setLocalStorage } from "./utils.mjs";*/
 import { loadHeaderFooter } from "./utils.mjs";
 import ShoppingCart from "./ShoppingCart.mjs";
 
-const element = document.querySelector(".product-list");
+const element = document.querySelector(".cart-product-list");
 
 const shoppingCart = new ShoppingCart("so-cart", element);
 
 function renderCartContents() {
   const cartItems = shoppingCart.getProducts();
-  /*const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");*/
   element.innerHTML = "";
-  shoppingCart.renderList(cartItems);
-  addRemoveButtonListeners();
-  shoppingCart.getTotal();
+
+  // Check if cart is empty
+  if (!cartItems || cartItems.length === 0) {
+    // Show empty cart message
+    document.querySelector(".empty-cart-message").style.display = "block";
+
+    // Hide cart header and footer
+    document.querySelector(".cart-header").style.display = "none";
+    document.querySelector(".cart-footer").classList.add("hide");
+    document.getElementById("checkout").style.display = "none";
+  } else {
+    // Show cart items
+    document.querySelector(".cart-header").style.display = "grid";
+    shoppingCart.renderList(cartItems);
+    addRemoveButtonListeners();
+    addQuantityButtonListeners();
+    shoppingCart.getTotal();
+  }
 }
 
 /*function cartItemTemplate(item) {
@@ -51,6 +64,26 @@ function addRemoveButtonListeners() {
   });
 }
 
+function addQuantityButtonListeners() {
+  const decreaseBtns = document.querySelectorAll(".quantity-btn.decrease");
+  const increaseBtns = document.querySelectorAll(".quantity-btn.increase");
+
+  decreaseBtns.forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      const productId = e.currentTarget.dataset.id;
+      await shoppingCart.updateQuantity(productId, -1);
+      renderCartContents();
+    });
+  });
+
+  increaseBtns.forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      const productId = e.currentTarget.dataset.id;
+      await shoppingCart.updateQuantity(productId, 1);
+      renderCartContents();
+    });
+  });
+}
 /*function removeProductFromCart(productId) {
   const cartItems = getLocalStorage("so-cart") || [];
   const newCartItems = cartItems.filter((item) => item.Id !== productId);
