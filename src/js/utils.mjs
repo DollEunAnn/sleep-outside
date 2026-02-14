@@ -42,6 +42,17 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
+export function renderListDOM(template, parentElement, list) {
+  parentElement.innerHTML = "";
+
+  list.forEach(item => {
+    const element = template(item);
+    parentElement.appendChild(element);
+  });
+}
+
+
+
 // DISCOUNT FUNCTION
 export function calculateDiscount(listPrice, finalPrice) {
 

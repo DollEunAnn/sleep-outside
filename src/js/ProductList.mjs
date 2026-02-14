@@ -1,5 +1,7 @@
 // Generate a list of product card in HTML
-import { renderListWithTemplate , calculateDiscount} from "./utils.mjs";
+import { renderListDOM , calculateDiscount} from "./utils.mjs";
+import { showQuickView } from "./quickView.js";
+
 
 export default class ProductList {
     constructor(category, dataSource, listElement) {
@@ -19,7 +21,7 @@ export default class ProductList {
         // const htmlStrings = list.map(productCardTemplate);
         // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
 
-        renderListWithTemplate(productCardTemplate, this.listElement, list);
+        renderListDOM(productCardTemplate, this.listElement, list);
     }
 }
 
@@ -31,18 +33,62 @@ function productCardTemplate(product) {
   // 1. calculate discount before rendering
   const discount = calculateDiscount(product.ListPrice, product.FinalPrice);
 
-  return `<li class="product-card">
-    <a href="../product_pages/?product=${product.Id}">
-      <picture>
-        <source media="(max-width: 480px)" srcset="${product.Images.PrimaryMedium}"/>
-        <img src="${product.Images.PrimaryLarge}" alt="Image of ${product.Name}"/>
-      </picture>
-      <h2 class="card__brand">${product.Brand.Name}</h2>
-      <h3 class="card__name">${product.Name}</h3>
-      <p class="product-card__price">$${product.ListPrice}</p>
+  // --- LI wrapper ---
+  const li = document.createElement("li");
+  li.className = "product-card";
 
-      <!-- display only if discount EXISTS -->
-      ${discount ? `<p class="discount">-${discount}%</p>` : ""}
-    </a>
-  </li>`
+  // --- LINK ---
+  const link = document.createElement("a");
+  link.href = `../product_pages/?product=${product.Id}`;
+
+  // --- PICTURE ---
+  const picture = document.createElement("picture");
+  const source = document.createElement("source");
+  source.media = "(max-width: 480px)";
+  source.srcset = product.Images.PrimaryMedium;
+
+  const img = document.createElement("img");
+  img.src = product.Images.PrimaryLarge;
+  img.alt = `Image of ${product.Name}`;
+
+  picture.append(source, img);
+
+  // --- BRAND ---
+  const brand = document.createElement("h2");
+  brand.className = "card__brand";
+  brand.textContent = product.Brand.Name;
+
+  // --- NAME ---
+  const name = document.createElement("h3");
+  name.className = "card__name";
+  name.textContent = product.Name;
+
+  // --- PRICE ---
+  const price = document.createElement("p");
+  price.className = "product-card__price";
+  price.textContent = `$${product.ListPrice}`;
+
+  // --- DISCOUNT (only if exists) ---
+  if (discount) {
+    const discountEl = document.createElement("p");
+    discountEl.className = "discount";
+    discountEl.textContent = `-${discount}%`;
+    link.append(discountEl);
+  }
+  // append picture, brand, name, price to link
+  link.append(picture, brand, name, price);
+
+  // quick view button
+  const button = document.createElement("button");
+  button.className = "quick-view";
+  button.dataset.id = product.Id;
+  button.textContent = "Quick View";
+
+
+  button.addEventListener("click", () => showQuickView(product));
+  
+  // append link a to li
+  li.append(link, button);
+  return li;
+  
 }
